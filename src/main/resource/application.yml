@@ -1,0 +1,5 @@
+datasource:
+  driverClassName: com.mysql.jdbc.Driver
+  url: jdbc:mysql://dwlabdbdev.craqkyfxvbq0.ap-south-1.rds.amazonaws.com:3306/dwlabcustomerprofiler
+  username: sa
+  password: dwlabdb123#
