@@ -64,60 +64,6 @@ public class ServiceUtils {
 	//	StreamLambdaHandler.logger.log("outputJson: " + outputJson);
 		return outputJson;
 	}
-	public static String  websocketCall(WebSocketInput webSocketInput) {
-		
-		StringBuilder outputBuilder = new StringBuilder();
-		
-		ObjectMapper objectMapper = new ObjectMapper() ;
-	//	ServiceLogger.printInfoLog("iniside Api call websocketCall" + webSocketInput);
-	try {
-		proxySetup();
-		HostnameVerifier allHostsValid = new HostnameVerifier() {
-			
-			@Override
-			public boolean verify(String hostname, SSLSession session) {
-				return true;
-			}
-		};
-			
-			URL url;
-			HttpsURLConnection.setDefaultHostnameVerifier(allHostsValid);
-			
-			url = new URL("http://35.154.51.246:8888/api");
-			//url = new URL("http://localhost:8888/api");
-
-			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-
-			conn.setDoOutput(true);
-			conn.setRequestMethod("POST");
-			conn.setRequestProperty("Accept", "application/json");
-			conn.setRequestProperty("Content-Type", "application/json");
-			OutputStream os = conn.getOutputStream();
-			os.write(objectMapper.writeValueAsBytes(webSocketInput));
-			os.flush();
-			System.out.println("Response Code for web socket call is::"+conn.getResponseCode());
-			if (conn.getResponseCode() != 200) {
-				//ServiceLogger.printInfoLog("connection code in socket call"+conn.getResponseCode());
-				throw new Exception("Socket exception occurred");
-			}
-			BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-
-			String inputLine;
-
-			while ((inputLine = br.readLine()) != null) {
-				outputBuilder.append(inputLine);
-			}
-
-			conn.disconnect();
-			br.close();
-		} catch (Exception e) {
-			System.out.println("Exception Occured");
-			//ServiceLogger.printInfoLog("catch inside post api call");
-			//throw new Exception("Exception Occured");
-		}
-
-		System.out.println("Inside post api call output is  : " + outputBuilder.toString());
-		return outputBuilder.toString();
-	}
+	
 
 }
