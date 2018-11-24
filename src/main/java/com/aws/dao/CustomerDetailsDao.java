@@ -6,8 +6,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Calendar;
 
-import com.aws.data.Customer;
-import com.aws.handler.DWLabConnManager;
+import com.aws.data.User;
+import com.aws.handler.ConnManager;
 import com.aws.handler.Database;
 
 public class CustomerDetailsDao implements ICustomerDetailsDao {
@@ -18,11 +18,37 @@ public class CustomerDetailsDao implements ICustomerDetailsDao {
 		return 0;
 	}
 
-	@Override
-	public String getCustomerName(int id) {
-		// TODO Auto-generated method stub
-		return null;
-	}/*
+	
+	public String getCustomerName(String name) {
+
+		User customer = null;
+		String response="";
+		try {
+
+			Connection conn = ConnManager.createConnection();
+			System.out.println(conn);
+			PreparedStatement ps = conn.prepareStatement("SELECT * FROM user where nae="+name);
+			ResultSet rs = ps.executeQuery();
+
+			if (rs.next()) {
+				response =  "user found";
+			}
+			else {
+				response = "user not found";
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		catch(ClassNotFoundException ex)
+		{
+			ex.printStackTrace();
+		}
+		return response;
+	}
+	
+	
+	/*
+	
 
 	@Override
 	public String getCustomerName(int id) {

@@ -46,6 +46,9 @@ dependencies {
     compile group: 'org.codehaus.jackson', name: 'jackson-xc', version:'1.9.13'
     compile group: 'org.codehaus.jackson', name: 'jackson-jaxrs', version:'1.9.13'
     compile group: 'org.codehaus.jackson', name: 'jackson-mapper-asl', version:'1.9.13' 
+    // https://mvnrepository.com/artifact/org.hibernate/hibernate-core
+compile group: 'org.hibernate', name: 'hibernate-core', version: '5.2.10.Final'
+    
 }
 
 task buildZip(type: Zip) {

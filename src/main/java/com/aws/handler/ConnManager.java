@@ -16,19 +16,12 @@ public class ConnManager {
 	public static Connection createConnection() throws ClassNotFoundException,
 			SQLException {
 
-		Properties pr = new Properties();
 		try {
-			/*pr.load(DWLabConnManager.class.getClassLoader()
-					.getResourceAsStream("application.properties"));
-		
-			System.out.print("asdf"+pr.getProperty("RMBOTDB.driverClassName"));*/
-			Class.forName("com.mysql.jdbc.Driver");
-			
-			//String connectionUrl = pr.getProperty("RMBOTDB.connectionUrl") ;
-			String connectionUrl = "jdbc:mysql://localhost:3306/mydb";
-			
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			String connectionUrl = "jdbc:mysql://score.cfracnybfkym.us-east-1.rds.amazonaws.com:3306/statistics";
 			conn = DriverManager.getConnection(
-					connectionUrl,"root", "root");
+					connectionUrl,"vikash", "qwerty1234");
+			System.out.print("Connection obtained is:"+conn.toString());
 		} catch (Exception e) {
 			if (conn != null) {
 				conn.close();
